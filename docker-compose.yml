@@ -1,0 +1,33 @@
+services:
+  opa:
+    image: openpolicyagent/opa:1.12.2-envoy-static
+    command:
+      - "run"
+      - "--server"
+      - "--addr=0.0.0.0:8181"
+      - "--config-file=/config/config.yaml"
+      - "/policies/policy.rego"
+    volumes:
+      - ./compose/opa/policy.rego:/policies/policy.rego:ro
+      - ./compose/opa/config.yaml:/config/config.yaml:ro
+    ports:
+      - "8181:8181"
+
+  envoy:
+    image: envoyproxy/envoy:v1.37.0
+    volumes:
+      - ./compose/envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+    ports:
+      - "8080:8080"
+    depends_on:
+      - opa
+      - zero-trust-quiz
+
+  zero-trust-quiz:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ./zero-trust-quiz:/app
+    command: sh -c "npm install && npm run dev"
+    environment:
+      - PORT=3000
