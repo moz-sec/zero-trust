@@ -1,6 +1,9 @@
 # Zero Trust Architecture
 
-[NIST SP 1800-35](https://doi.org/10.6028/NIST.SP.1800-35)
+ゼロトラストアーキテクチャは、以下の文献が参考になります。
+
+- [NIST SP 800-207: Zero-Trust Architecture](https://doi.org/10.6028/NIST.SP.800-207)
+- [NIST SP 1800-35 Implementing Zero-Trust Architecture: High-Level Document](https://doi.org/10.6028/NIST.SP.1800-35)
 
 オープンソースソフトウェアのみを使用してゼロトラストアーキテクチャを実現します。
 参照図の各論理コンポーネントを具体的なOSS候補にマッピングし、すべての要素をカバーする最小限のスタックを提供します。
